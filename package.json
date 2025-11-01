@@ -1,0 +1,40 @@
+{
+  "name": "mboka-id",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Monorepo for Mboka ID project",
+  "scripts": {
+    "dev": "turbo run dev start:dev --parallel --filter=@mboka-id/frontend --filter=@mboka-id/backend",
+    "dev:backend": "turbo run start:dev --filter=@mboka-id/backend",
+    "dev:frontend": "turbo run dev --filter=@mboka-id/frontend",
+    "build": "turbo run build",
+    "build:backend": "turbo run build --filter=@mboka-id/backend",
+    "build:frontend": "turbo run build --filter=@mboka-id/frontend",
+    "start": "turbo run start:prod --filter=@mboka-id/backend",
+    "start:frontend": "turbo run start --filter=@mboka-id/frontend",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint",
+    "lint:backend": "turbo run lint --filter=@mboka-id/backend",
+    "lint:frontend": "turbo run lint --filter=@mboka-id/frontend",
+    "test": "turbo run test",
+    "test:watch": "turbo run test:watch --filter=@mboka-id/backend",
+    "test:cov": "turbo run test:cov --filter=@mboka-id/backend",
+    "format": "turbo run format",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore",
+    "type-check": "turbo run type-check --filter=@mboka-id/*",
+    "clean": "pnpm -r exec rm -rf node_modules && rm -rf node_modules && rm -rf .turbo",
+    "clean:build": "turbo run clean && pnpm -r exec rm -rf dist build .next out coverage",
+    "clean:cache": "rm -rf .turbo",
+    "graph": "turbo run build --graph"
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2",
+    "turbo": "^2.0.0",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.0"
+}

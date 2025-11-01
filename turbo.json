@@ -1,0 +1,107 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [
+    "**/.env.*local",
+    ".env"
+  ],
+  "globalEnv": [
+    "NODE_ENV"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [
+        "dist/**",
+        ".next/**",
+        "!.next/cache/**",
+        "build/**",
+        "coverage/**"
+      ],
+      "env": [
+        "NODE_ENV",
+        "DATABASE_URL",
+        "API_URL"
+      ]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "env": [
+        "NODE_ENV",
+        "PORT"
+      ]
+    },
+    "start:dev": {
+      "cache": false,
+      "persistent": true,
+      "env": [
+        "NODE_ENV",
+        "PORT"
+      ]
+    },
+    "start": {
+      "cache": false,
+      "persistent": true,
+      "env": [
+        "NODE_ENV",
+        "PORT"
+      ]
+    },
+    "start:prod": {
+      "cache": false,
+      "persistent": true,
+      "env": [
+        "NODE_ENV",
+        "PORT"
+      ]
+    },
+    "lint": {
+      "dependsOn": ["^lint"],
+      "outputs": [],
+      "inputs": [
+        "src/**/*.{ts,tsx,js,jsx}",
+        "app/**/*.{ts,tsx,js,jsx}",
+        "*.{ts,tsx,js,jsx}",
+        "eslint.config.*",
+        ".eslintrc.*"
+      ]
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "outputs": ["coverage/**"],
+      "inputs": [
+        "src/**/*.{ts,tsx}",
+        "test/**/*.{ts,tsx}",
+        "*.{ts,tsx}",
+        "jest.config.*",
+        "tsconfig.json"
+      ],
+      "env": [
+        "NODE_ENV"
+      ]
+    },
+    "test:watch": {
+      "cache": false,
+      "persistent": true
+    },
+    "test:cov": {
+      "dependsOn": ["^build"],
+      "outputs": ["coverage/**"],
+      "inputs": [
+        "src/**/*.{ts,tsx}",
+        "test/**/*.{ts,tsx}"
+      ]
+    },
+    "format": {
+      "outputs": [],
+      "inputs": [
+        "**/*.{ts,tsx,js,jsx,json,md}",
+        ".prettierrc*",
+        "prettier.config.*"
+      ]
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}

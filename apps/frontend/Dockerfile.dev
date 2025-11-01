@@ -1,0 +1,28 @@
+FROM node:20-alpine
+
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@8.15.0 --activate
+
+WORKDIR /app
+
+# Copy package files
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY apps/frontend/package.json ./apps/frontend/
+COPY turbo.json ./
+
+# Install all dependencies (including dev)
+RUN pnpm install
+
+# Copy source code
+COPY apps/frontend ./apps/frontend
+
+WORKDIR /app/apps/frontend
+
+# Expose port
+EXPOSE 4570
+
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Start in development mode (will be overridden by docker-compose command)
+CMD ["pnpm", "dev"]
+

@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: apps/backend/Dockerfile.dev
+    container_name: mboka-id-backend-dev
+    ports:
+      - "4571:4571"
+    volumes:
+      - ./apps/backend:/app/apps/backend
+      - /app/apps/backend/node_modules
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - PORT=4571
+    networks:
+      - mboka-id-network
+    restart: unless-stopped
+    command: pnpm --filter @mboka-id/backend start:dev
+
+  frontend:
+    build:
+      context: .
+      dockerfile: apps/frontend/Dockerfile.dev
+    container_name: mboka-id-frontend-dev
+    ports:
+      - "4570:4570"
+    volumes:
+      - ./apps/frontend:/app/apps/frontend
+      - /app/apps/frontend/node_modules
+      - /app/apps/frontend/.next
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - PORT=4570
+      - NEXT_PUBLIC_API_URL=http://localhost:4571
+      - WATCHPACK_POLLING=true
+    networks:
+      - mboka-id-network
+    restart: unless-stopped
+    depends_on:
+      - backend
+    command: pnpm --filter @mboka-id/frontend dev
+
+networks:
+  mboka-id-network:
+    driver: bridge
+
