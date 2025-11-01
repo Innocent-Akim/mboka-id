@@ -8,12 +8,14 @@ WORKDIR /app
 # Copy package files
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/backend/package.json ./apps/backend/
+COPY packages/core/package.json ./packages/core/
 COPY turbo.json ./
 
 # Install all dependencies (including dev)
 RUN pnpm install
 
 # Copy source code
+COPY packages/core ./packages/core
 COPY apps/backend ./apps/backend
 
 WORKDIR /app/apps/backend
