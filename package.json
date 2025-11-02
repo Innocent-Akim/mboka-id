@@ -20,7 +20,6 @@
     "test:watch": "turbo run test:watch --filter=@mboka-id/backend",
     "test:cov": "turbo run test:cov --filter=@mboka-id/backend",
     "format": "turbo run format",
-    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore",
     "type-check": "turbo run type-check --filter=@mboka-id/*",
     "clean": "pnpm -r exec rm -rf node_modules && rm -rf node_modules && rm -rf .turbo",
     "clean:build": "turbo run clean && pnpm -r exec rm -rf dist build .next out coverage",
