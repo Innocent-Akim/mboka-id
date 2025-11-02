@@ -1,355 +1,355 @@
 # Mboka ID - Monorepo
 
-Ce monorepo contient l'application complète Mboka ID avec le backend (NestJS) et le frontend (Next.js). Il utilise **pnpm workspaces** et **Turborepo** pour une gestion optimale des dépendances et un système de build intelligent avec cache.
+This monorepo contains the complete Mboka ID application with the backend (NestJS) and frontend (Next.js). It uses **pnpm workspaces** and **Turborepo** for optimal dependency management and an intelligent build system with caching.
 
 ## 📦 Structure
 
 ```
 mboka-id/
 ├── apps/
-│   ├── backend/          # API NestJS
-│   └── frontend/         # Application Next.js
-├── packages/             # Packages partagés (optionnel)
-├── tools/                # Outils et scripts (optionnel)
-├── package.json          # Configuration racine du monorepo
-├── pnpm-workspace.yaml   # Configuration des workspaces pnpm
-├── turbo.json            # Configuration Turborepo
-├── .npmrc                # Configuration pnpm
-└── .turboignore          # Fichiers ignorés par Turborepo
+│   ├── backend/          # NestJS API
+│   └── frontend/         # Next.js Application
+├── packages/             # Shared packages (optional)
+├── tools/                # Tools and scripts (optional)
+├── package.json          # Root monorepo configuration
+├── pnpm-workspace.yaml   # pnpm workspaces configuration
+├── turbo.json            # Turborepo configuration
+├── .npmrc                # pnpm configuration
+└── .turboignore          # Files ignored by Turborepo
 ```
 
-## 🚀 Prérequis
+## 🚀 Prerequisites
 
 - Node.js >= 18.0.0
 - pnpm >= 8.0.0
 
-Pour installer pnpm :
+To install pnpm:
 ```bash
 npm install -g pnpm
-# ou
+# or
 corepack enable
 corepack prepare pnpm@8.15.0 --activate
 ```
 
 ## 📥 Installation
 
-Installer toutes les dépendances :
+Install all dependencies:
 ```bash
 pnpm install
 ```
 
-## 🛠️ Scripts disponibles
+## 🛠️ Available Scripts
 
-### Développement
+### Development
 
 ```bash
-# Lancer backend et frontend en parallèle
+# Run backend and frontend in parallel
 pnpm dev
-# - Frontend disponible sur http://localhost:4570
-# - Backend disponible sur http://localhost:4571
+# - Frontend available on http://localhost:4570
+# - Backend available on http://localhost:4571
 
-# Lancer uniquement le backend (port 4571)
+# Run backend only (port 4571)
 pnpm dev:backend
 
-# Lancer uniquement le frontend (port 4570)
+# Run frontend only (port 4570)
 pnpm dev:frontend
 ```
 
 ### Build
 
 ```bash
-# Builder tous les projets
+# Build all projects
 pnpm build
 
-# Builder uniquement le backend
+# Build backend only
 pnpm build:backend
 
-# Builder uniquement le frontend
+# Build frontend only
 pnpm build:frontend
 ```
 
 ### Linting
 
 ```bash
-# Linter tous les projets
+# Lint all projects
 pnpm lint
 
-# Linter et corriger automatiquement
+# Lint and fix automatically
 pnpm lint:fix
 
-# Linter uniquement le backend
+# Lint backend only
 pnpm lint:backend
 
-# Linter uniquement le frontend
+# Lint frontend only
 pnpm lint:frontend
 ```
 
 ### Tests
 
 ```bash
-# Lancer tous les tests
+# Run all tests
 pnpm test
 
-# Lancer les tests en mode watch (backend uniquement)
+# Run tests in watch mode (backend only)
 pnpm test:watch
 
-# Lancer les tests avec couverture de code
+# Run tests with code coverage
 pnpm test:cov
 ```
 
-### Formatage
+### Formatting
 
 ```bash
-# Formater le code dans tous les projets
+# Format code in all projects
 pnpm format
 
-# Vérifier le formatage sans modifier
+# Check formatting without modifying
 pnpm format:check
 ```
 
-### Visualisation
+### Visualization
 
 ```bash
-# Visualiser le graphe de dépendances des builds
+# Visualize the build dependency graph
 pnpm graph
 ```
 
-### Nettoyage
+### Cleaning
 
 ```bash
-# Supprimer tous les node_modules et le cache
+# Remove all node_modules and cache
 pnpm clean
 
-# Supprimer tous les builds (dist, build, .next, out, coverage)
+# Remove all builds (dist, build, .next, out, coverage)
 pnpm clean:build
 
-# Nettoyer uniquement le cache Turborepo
+# Clean Turborepo cache only
 pnpm clean:cache
 ```
 
 ## ⚡ Turborepo
 
-Ce monorepo utilise **Turborepo** pour :
-- **Cache intelligent** : Les builds sont mis en cache et réutilisés automatiquement
-- **Exécution parallèle** : Les tâches s'exécutent en parallèle lorsque possible
-- **Dépendances gérées** : Les tâches sont exécutées dans le bon ordre selon les dépendances
-- **Cache distribué** : Possibilité de partager le cache entre les machines (CI/CD)
+This monorepo uses **Turborepo** for:
+- **Intelligent caching**: Builds are cached and automatically reused
+- **Parallel execution**: Tasks run in parallel when possible
+- **Managed dependencies**: Tasks are executed in the correct order based on dependencies
+- **Distributed cache**: Ability to share cache between machines (CI/CD)
 
-### Commandes Turborepo avancées
+### Advanced Turborepo Commands
 
 ```bash
-# Voir le statut du cache (dry-run)
+# See cache status (dry-run)
 turbo run build --dry-run
 
-# Forcer une reconstruction (ignorer le cache)
+# Force a rebuild (ignore cache)
 turbo run build --force
 
-# Voir les tâches qui seront exécutées
+# See tasks that will be executed
 turbo run build --graph
 
-# Filtrer par package
+# Filter by package
 turbo run build --filter=@mboka-id/backend
 turbo run build --filter=@mboka-id/frontend
 
-# Exécuter uniquement les packages affectés
+# Run only affected packages
 turbo run build --filter='[HEAD^1]'
 ```
 
-### Configuration du cache
+### Cache Configuration
 
-Le cache Turborepo est configuré dans `turbo.json`. Les sorties suivantes sont mises en cache :
-- `dist/**` (builds backend)
-- `.next/**` (builds Next.js, excluant `.next/cache/**`)
-- `build/**` (autres builds)
-- `coverage/**` (rapports de tests)
+The Turborepo cache is configured in `turbo.json`. The following outputs are cached:
+- `dist/**` (backend builds)
+- `.next/**` (Next.js builds, excluding `.next/cache/**`)
+- `build/**` (other builds)
+- `coverage/**` (test reports)
 
-## 📝 Gestion des dépendances
+## 📝 Dependency Management
 
-### Ajouter une dépendance
+### Adding a Dependency
 
 ```bash
-# Ajouter une dépendance au backend
+# Add a dependency to backend
 pnpm --filter @mboka-id/backend add <package>
 
-# Ajouter une dépendance au frontend
+# Add a dependency to frontend
 pnpm --filter @mboka-id/frontend add <package>
 
-# Ajouter une dépendance de développement
+# Add a development dependency
 pnpm --filter @mboka-id/backend add -D <package>
 
-# Ajouter une dépendance partagée à la racine
+# Add a shared dependency to root
 pnpm add -w <package>
 
-# Ajouter une dépendance à tous les packages
+# Add a dependency to all packages
 pnpm add -r <package>
 ```
 
-### Gestion des workspaces
+### Workspace Management
 
-Les workspaces sont configurés dans `pnpm-workspace.yaml` et incluent :
-- `apps/*` - Applications principales
-- `packages/*` - Packages partagés
-- `tools/*` - Outils et scripts
+Workspaces are configured in `pnpm-workspace.yaml` and include:
+- `apps/*` - Main applications
+- `packages/*` - Shared packages
+- `tools/*` - Tools and scripts
 
 ## 🏗️ Architecture
 
-- **Backend** (`apps/backend`) : API REST construite avec NestJS, TypeScript
-- **Frontend** (`apps/frontend`) : Application web construite avec Next.js 16, React 19, TypeScript, Tailwind CSS
+- **Backend** (`apps/backend`): REST API built with NestJS, TypeScript
+- **Frontend** (`apps/frontend`): Web application built with Next.js 16, React 19, TypeScript, Tailwind CSS
 
-### Structure recommandée pour l'extension
+### Recommended Structure for Extension
 
-Vous pouvez ajouter des packages partagés dans `packages/` :
+You can add shared packages in `packages/`:
 ```
 packages/
-├── shared-types/     # Types TypeScript partagés
-├── ui/               # Composants UI partagés
-└── utils/            # Utilitaires partagés
+├── shared-types/     # Shared TypeScript types
+├── ui/               # Shared UI components
+└── utils/            # Shared utilities
 ```
 
-## 🎯 Avantages de cette configuration
+## 🎯 Benefits of This Configuration
 
-- **Gestion unifiée** : Un seul point d'entrée pour tous les projets
-- **Cache intelligent** : Turborepo met en cache les builds pour des exécutions plus rapides
-- **Parallélisation** : Les tâches s'exécutent en parallèle quand c'est possible
-- **Dépendances partagées** : Réduction de la duplication des dépendances avec hoisting
-- **CI/CD optimisé** : Configuration prête pour l'intégration continue avec cache distribué
-- **Type-safety** : Partage de types TypeScript entre packages
+- **Unified management**: Single entry point for all projects
+- **Intelligent caching**: Turborepo caches builds for faster executions
+- **Parallelization**: Tasks run in parallel when possible
+- **Shared dependencies**: Reduced dependency duplication with hoisting
+- **Optimized CI/CD**: Ready for continuous integration with distributed cache
+- **Type-safety**: Share TypeScript types between packages
 
-## 🔧 Configuration pnpm
+## 🔧 pnpm Configuration
 
-La configuration pnpm est dans `.npmrc` :
-- `shamefully-hoist=true` : Hoist des dépendances pour compatibilité
-- `node-linker=hoisted` : Structure de nœuds hoisted
-- `auto-install-peers=true` : Installation automatique des peer dependencies
-- Patterns de hoisting public pour les outils de développement
+The pnpm configuration is in `.npmrc`:
+- `shamefully-hoist=true`: Hoist dependencies for compatibility
+- `node-linker=hoisted`: Hoisted node structure
+- `auto-install-peers=true`: Automatic installation of peer dependencies
+- Public hoisting patterns for development tools
 
-## 🚢 Déploiement
+## 🚢 Deployment
 
-### Build de production
+### Production Build
 
 ```bash
-# Builder tous les projets pour la production
+# Build all projects for production
 pnpm build
 
-# Les builds seront dans :
+# Builds will be in:
 # - apps/backend/dist/
 # - apps/frontend/.next/
 ```
 
-### Variables d'environnement
+### Environment Variables
 
-Les variables d'environnement peuvent être définies dans :
-- `.env` (racine)
-- `.env.local` (local, non versionné)
+Environment variables can be defined in:
+- `.env` (root)
+- `.env.local` (local, not versioned)
 - `apps/backend/.env`
 - `apps/frontend/.env`
 
-### Configuration des ports
+### Port Configuration
 
-Les ports sont configurés comme suit :
-- **Frontend** : Port `4570` (http://localhost:4570)
-- **Backend** : Port `4571` (http://localhost:4571)
+Ports are configured as follows:
+- **Frontend**: Port `4570` (http://localhost:4570)
+- **Backend**: Port `4571` (http://localhost:4571)
 
-Ces ports sont définis dans :
-- `apps/frontend/package.json` - scripts `dev` et `start`
-- `apps/backend/src/main.ts` - port par défaut
-- `apps/backend/package.json` - variables d'environnement PORT dans les scripts
+These ports are defined in:
+- `apps/frontend/package.json` - `dev` and `start` scripts
+- `apps/backend/src/main.ts` - default port
+- `apps/backend/package.json` - PORT environment variables in scripts
 
 ## 🐳 Docker
 
-Ce projet inclut une configuration Docker complète pour le développement et la production.
+This project includes a complete Docker configuration for development and production.
 
-### Prérequis
+### Prerequisites
 
 - Docker >= 20.10
 - Docker Compose >= 2.0
 
 ### Production
 
-Pour construire et lancer les conteneurs en mode production :
+To build and run containers in production mode:
 
 ```bash
-# Construire et lancer les services
+# Build and start services
 docker-compose up -d
 
-# Voir les logs
+# View logs
 docker-compose logs -f
 
-# Arrêter les services
+# Stop services
 docker-compose down
 
-# Reconstruire les images
+# Rebuild images
 docker-compose build --no-cache
 ```
 
-Les services seront disponibles sur :
+Services will be available on:
 - Frontend: http://localhost:4570
 - Backend: http://localhost:4571
 
-### Développement
+### Development
 
-Pour lancer en mode développement avec hot-reload :
+To run in development mode with hot-reload:
 
 ```bash
-# Lancer en mode développement
+# Run in development mode
 docker-compose -f docker-compose.dev.yml up
 
-# Lancer en arrière-plan
+# Run in background
 docker-compose -f docker-compose.dev.yml up -d
 
-# Arrêter
+# Stop
 docker-compose -f docker-compose.dev.yml down
 ```
 
-### Commandes utiles
+### Useful Commands
 
 ```bash
-# Reconstruire une seule image
+# Rebuild a single image
 docker-compose build backend
 docker-compose build frontend
 
-# Voir les logs d'un service spécifique
+# View logs for a specific service
 docker-compose logs -f backend
 docker-compose logs -f frontend
 
-# Accéder au shell d'un conteneur
+# Access container shell
 docker-compose exec backend sh
 docker-compose exec frontend sh
 
-# Nettoyer les images et volumes
+# Clean images and volumes
 docker-compose down -v --rmi all
 ```
 
-### Structure Docker
+### Docker Structure
 
-- `apps/backend/Dockerfile` - Production build pour le backend
-- `apps/backend/Dockerfile.dev` - Development build pour le backend
-- `apps/frontend/Dockerfile` - Production build pour le frontend
-- `apps/frontend/Dockerfile.dev` - Development build pour le frontend
-- `docker-compose.yml` - Configuration pour la production
-- `docker-compose.dev.yml` - Configuration pour le développement
-- `.dockerignore` - Fichiers exclus des builds Docker
+- `apps/backend/Dockerfile` - Production build for backend
+- `apps/backend/Dockerfile.dev` - Development build for backend
+- `apps/frontend/Dockerfile` - Production build for frontend
+- `apps/frontend/Dockerfile.dev` - Development build for frontend
+- `docker-compose.yml` - Configuration for production
+- `docker-compose.dev.yml` - Configuration for development
+- `.dockerignore` - Files excluded from Docker builds
 
-### Optimisations
+### Optimizations
 
-- Utilisation de builds multi-stage pour réduire la taille des images
-- Cache des dépendances pour accélérer les rebuilds
-- Mode standalone pour Next.js (image optimisée)
-- Health checks configurés pour les deux services
+- Use of multi-stage builds to reduce image size
+- Dependency caching to speed up rebuilds
+- Standalone mode for Next.js (optimized image)
+- Health checks configured for both services
 
-## 📚 Ressources
+## 📚 Resources
 
-- [Documentation Turborepo](https://turbo.build/repo/docs)
-- [Documentation pnpm workspaces](https://pnpm.io/workspaces)
+- [Turborepo Documentation](https://turbo.build/repo/docs)
+- [pnpm workspaces Documentation](https://pnpm.io/workspaces)
 - [NestJS Documentation](https://docs.nestjs.com/)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Docker Documentation](https://docs.docker.com/)
 
-## 🤝 Contribution
+## 🤝 Contributing
 
-1. Installer les dépendances : `pnpm install`
-2. Créer une branche pour votre fonctionnalité
-3. Développer avec : `pnpm dev`
-4. Linter : `pnpm lint`
-5. Tester : `pnpm test`
-6. Builder : `pnpm build`
+1. Install dependencies: `pnpm install`
+2. Create a branch for your feature
+3. Develop with: `pnpm dev`
+4. Lint: `pnpm lint`
+5. Test: `pnpm test`
+6. Build: `pnpm build`
