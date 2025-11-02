@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "type-check": "tsc --noEmit",
-    "test": "echo 'No tests configured'"
+    "test": "echo 'No tests configured' && exit 0"
   },
   "dependencies": {
     "react": "19.2.0",

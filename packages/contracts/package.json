@@ -38,7 +38,7 @@
     "lint": "echo 'No linting configured'",
     "format": "prettier --write \"src/**/*.ts\"",
     "type-check": "tsc --noEmit",
-    "test": "echo 'No tests configured'"
+    "test": "echo 'No tests configured' && exit 0"
   },
   "dependencies": {
     "tslib": "^2.6.2"

@@ -55,7 +55,8 @@
         "jest.config.*",
         "tsconfig.json"
       ],
-      "env": ["NODE_ENV"]
+      "env": ["NODE_ENV"],
+      "cache": false
     },
     "test:watch": {
       "cache": false,
