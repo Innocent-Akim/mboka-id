@@ -17,9 +17,7 @@ export interface IBaseIntegrationModel {
   integrationId: ID;
 }
 
-export interface IBaseEntityDateModel
-  extends IBaseModel,
-    IBaseSoftDeleteModel {
+export interface IBaseEntityDateModel extends IBaseModel, IBaseSoftDeleteModel {
   id: ID;
 }
 

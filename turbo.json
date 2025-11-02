@@ -1,12 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": [
-    "**/.env.*local",
-    ".env"
-  ],
-  "globalEnv": [
-    "NODE_ENV"
-  ],
+  "globalDependencies": ["**/.env.*local", ".env"],
+  "globalEnv": ["NODE_ENV"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
@@ -17,43 +12,27 @@
         "build/**",
         "coverage/**"
       ],
-      "env": [
-        "NODE_ENV",
-        "DATABASE_URL",
-        "API_URL"
-      ]
+      "env": ["NODE_ENV", "DATABASE_URL", "API_URL"]
     },
     "dev": {
       "cache": false,
       "persistent": true,
-      "env": [
-        "NODE_ENV",
-        "PORT"
-      ]
+      "env": ["NODE_ENV", "PORT"]
     },
     "start:dev": {
       "cache": false,
       "persistent": true,
-      "env": [
-        "NODE_ENV",
-        "PORT"
-      ]
+      "env": ["NODE_ENV", "PORT"]
     },
     "start": {
       "cache": false,
       "persistent": true,
-      "env": [
-        "NODE_ENV",
-        "PORT"
-      ]
+      "env": ["NODE_ENV", "PORT"]
     },
     "start:prod": {
       "cache": false,
       "persistent": true,
-      "env": [
-        "NODE_ENV",
-        "PORT"
-      ]
+      "env": ["NODE_ENV", "PORT"]
     },
     "lint": {
       "dependsOn": ["^lint"],
@@ -76,9 +55,7 @@
         "jest.config.*",
         "tsconfig.json"
       ],
-      "env": [
-        "NODE_ENV"
-      ]
+      "env": ["NODE_ENV"]
     },
     "test:watch": {
       "cache": false,
@@ -87,10 +64,7 @@
     "test:cov": {
       "dependsOn": ["^build"],
       "outputs": ["coverage/**"],
-      "inputs": [
-        "src/**/*.{ts,tsx}",
-        "test/**/*.{ts,tsx}"
-      ]
+      "inputs": ["src/**/*.{ts,tsx}", "test/**/*.{ts,tsx}"]
     },
     "format": {
       "outputs": [],
@@ -98,6 +72,16 @@
         "**/*.{ts,tsx,js,jsx,json,md}",
         ".prettierrc*",
         "prettier.config.*"
+      ]
+    },
+    "type-check": {
+      "dependsOn": ["^build"],
+      "outputs": [],
+      "inputs": [
+        "src/**/*.{ts,tsx}",
+        "app/**/*.{ts,tsx}",
+        "*.{ts,tsx}",
+        "tsconfig.json"
       ]
     },
     "clean": {

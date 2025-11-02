@@ -20,21 +20,21 @@ export interface ICitizen extends IBaseEntity {
 }
 
 export enum Gender {
-  MALE = 'M',
-  FEMALE = 'F',
-  OTHER = 'Other',
+  MALE = "M",
+  FEMALE = "F",
+  OTHER = "Other",
 }
 
 export enum ResidencyStatus {
-  CITIZEN = 'citizen',
-  REFUGEE = 'refugee',
-  STATELESS = 'stateless',
-  TEMPORARY_RESIDENT = 'temporary_resident',
+  CITIZEN = "citizen",
+  REFUGEE = "refugee",
+  STATELESS = "stateless",
+  TEMPORARY_RESIDENT = "temporary_resident",
 }
 
 export enum VerificationStatus {
-  UNVERIFIED = 'unverified',
-  IN_PROGRESS = 'in_progress',
-  VERIFIED = 'verified',
-  REJECTED = 'rejected',
+  UNVERIFIED = "unverified",
+  IN_PROGRESS = "in_progress",
+  VERIFIED = "verified",
+  REJECTED = "rejected",
 }

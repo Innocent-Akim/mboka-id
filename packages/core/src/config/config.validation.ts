@@ -23,4 +23,3 @@ export const configValidationSchema = Joi.object({
   APP_VERSION: Joi.string().default('1.0.0'),
   APP_URL: Joi.string().default('http://localhost:4571'),
 });
-

@@ -18,7 +18,7 @@
 
 <!-- List the specific changes made in this PR -->
 
-- 
+-
 
 ## Testing
 
@@ -55,4 +55,3 @@ Closes #
 ## Additional Notes
 
 <!-- Any additional information that reviewers should know -->
-

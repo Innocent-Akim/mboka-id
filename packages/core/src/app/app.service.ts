@@ -7,10 +7,7 @@ export class AppService {
 
   getHello(): string {
     const appName = this.configService.get<string>('app.name', 'Application');
-    const appVersion = this.configService.get<string>(
-      'app.version',
-      '1.0.0',
-    );
+    const appVersion = this.configService.get<string>('app.version', '1.0.0');
     return `${appName} v${appVersion}`;
   }
 
@@ -25,4 +22,3 @@ export class AppService {
     };
   }
 }
-

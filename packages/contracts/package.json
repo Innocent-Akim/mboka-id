@@ -34,7 +34,11 @@
     "lib:build": "pnpm build",
     "lib:build:prod": "pnpm build:prod",
     "lib:watch": "tsc --watch",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "lint": "echo 'No linting configured'",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "type-check": "tsc --noEmit",
+    "test": "echo 'No tests configured'"
   },
   "dependencies": {
     "tslib": "^2.6.2"
@@ -42,6 +46,7 @@
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/node": "^22.10.7",
+    "prettier": "^3.4.2",
     "typescript": "^5.7.3"
   },
   "keywords": [
@@ -63,4 +68,3 @@
   },
   "sideEffects": false
 }
-

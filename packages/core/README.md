@@ -29,16 +29,19 @@ pnpm --filter @mboka-id/core add -D <package-name>
 ## 📚 Dépendances incluses
 
 ### Core NestJS
+
 - `@nestjs/common`
 - `@nestjs/config`
 - `@nestjs/platform-express`
 - `@nestjs/typeorm`
 
 ### Base de données
+
 - `typeorm`
 - `pg` (driver PostgreSQL)
 
 ### Utilitaires
+
 - `joi` (validation de schéma)
 - `reflect-metadata` (requis pour les décorateurs)
 - `rxjs` (requis par NestJS)
@@ -56,7 +59,7 @@ import { AppModule } from './app.module';
 bootstrapApplication({
   module: AppModule,
   globalPrefix: 'api', // Optionnel, utilise config par défaut
-  enableCors: true,     // Optionnel
+  enableCors: true, // Optionnel
 });
 ```
 
@@ -98,13 +101,13 @@ constructor(private configService: ConfigService) {
 Les contrats sont maintenant dans le package dédié `@mboka-id/contracts` :
 
 ```typescript
-import { 
-  IUser, 
-  ICreateUser, 
-  ILoginRequest, 
+import {
+  IUser,
+  ICreateUser,
+  ILoginRequest,
   ILoginResponse,
   IBaseResponse,
-  IPaginationParams 
+  IPaginationParams
 } from '@mboka-id/contracts';
 
 // Dans un service
@@ -124,4 +127,3 @@ async login(@Body() loginDto: ILoginRequest): Promise<ILoginResponse> {
 ```bash
 pnpm --filter @mboka-id/core build
 ```
-

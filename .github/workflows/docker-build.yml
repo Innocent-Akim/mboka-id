@@ -22,7 +22,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Login to Docker Hub
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && secrets.DOCKER_USERNAME != ''
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
@@ -32,7 +32,7 @@ jobs:
         id: meta-backend
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.DOCKER_REGISTRY }}/mboka-id-backend
+          images: mboka-id-backend
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -45,7 +45,7 @@ jobs:
         id: meta-frontend
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.DOCKER_REGISTRY }}/mboka-id-frontend
+          images: mboka-id-frontend
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -59,20 +59,22 @@ jobs:
         with:
           context: ./apps/backend
           file: ./apps/backend/Dockerfile
-          push: ${{ github.event_name != 'pull_request' }}
+          push: ${{ github.event_name != 'pull_request' && secrets.DOCKER_USERNAME != '' }}
           tags: ${{ steps.meta-backend.outputs.tags }}
           labels: ${{ steps.meta-backend.outputs.labels }}
-          cache-from: type=registry,ref=${{ secrets.DOCKER_REGISTRY }}/mboka-id-backend:buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKER_REGISTRY }}/mboka-id-backend:buildcache,mode=max
+          cache-from: ${{ secrets.DOCKER_REGISTRY != '' && format('type=registry,ref={0}/mboka-id-backend:buildcache', secrets.DOCKER_REGISTRY) || '' }}
+          cache-to: ${{ secrets.DOCKER_REGISTRY != '' && format('type=registry,ref={0}/mboka-id-backend:buildcache,mode=max', secrets.DOCKER_REGISTRY) || '' }}
+        continue-on-error: true
 
       - name: Build and push frontend image
         uses: docker/build-push-action@v5
         with:
           context: ./apps/frontend
           file: ./apps/frontend/Dockerfile
-          push: ${{ github.event_name != 'pull_request' }}
+          push: ${{ github.event_name != 'pull_request' && secrets.DOCKER_USERNAME != '' }}
           tags: ${{ steps.meta-frontend.outputs.tags }}
           labels: ${{ steps.meta-frontend.outputs.labels }}
-          cache-from: type=registry,ref=${{ secrets.DOCKER_REGISTRY }}/mboka-id-frontend:buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKER_REGISTRY }}/mboka-id-frontend:buildcache,mode=max
+          cache-from: ${{ secrets.DOCKER_REGISTRY != '' && format('type=registry,ref={0}/mboka-id-frontend:buildcache', secrets.DOCKER_REGISTRY) || '' }}
+          cache-to: ${{ secrets.DOCKER_REGISTRY != '' && format('type=registry,ref={0}/mboka-id-frontend:buildcache,mode=max', secrets.DOCKER_REGISTRY) || '' }}
+        continue-on-error: true
 

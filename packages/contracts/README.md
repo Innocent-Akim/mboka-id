@@ -14,13 +14,13 @@ pnpm --filter @mboka-id/contracts build
 ## 🔧 Utilisation
 
 ```typescript
-import { 
-  IUser, 
-  ICreateUser, 
-  ILoginRequest, 
+import {
+  IUser,
+  ICreateUser,
+  ILoginRequest,
   ILoginResponse,
   IBaseResponse,
-  IPaginationParams 
+  IPaginationParams
 } from '@mboka-id/contracts';
 
 // Dans un service
@@ -55,7 +55,7 @@ Exemple:
 
 ```typescript
 // src/product.contract.ts
-import { IBaseEntity } from './base.contract';
+import { IBaseEntity } from "./base.contract";
 
 export interface IProduct extends IBaseEntity {
   name: string;
@@ -65,8 +65,9 @@ export interface IProduct extends IBaseEntity {
 ```
 
 Puis ajouter dans `src/index.ts`:
+
 ```typescript
-export * from './product.contract';
+export * from "./product.contract";
 ```
 
 ## 🚀 Build
@@ -74,4 +75,3 @@ export * from './product.contract';
 ```bash
 pnpm --filter @mboka-id/contracts build
 ```
-

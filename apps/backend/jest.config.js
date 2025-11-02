@@ -6,4 +6,3 @@ module.exports = {
   rootDir: 'src',
   coverageDirectory: '../coverage',
 };
-

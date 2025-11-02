@@ -44,4 +44,3 @@ export async function bootstrapApplication(
 
   return app;
 }
-

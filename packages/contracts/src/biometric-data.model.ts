@@ -13,8 +13,8 @@ export interface IBiometricData extends IBaseEntity {
 }
 
 export enum BiometricDataType {
-  FINGERPRINTS = 'fingerprints',
-  PHOTO = 'photo',
-  IRIS = 'iris',
-  SIGNATURE = 'signature',
+  FINGERPRINTS = "fingerprints",
+  PHOTO = "photo",
+  IRIS = "iris",
+  SIGNATURE = "signature",
 }

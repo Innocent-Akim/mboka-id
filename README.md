@@ -24,6 +24,7 @@ mboka-id/
 - pnpm >= 8.0.0
 
 To install pnpm:
+
 ```bash
 npm install -g pnpm
 # or
@@ -34,6 +35,7 @@ corepack prepare pnpm@8.15.0 --activate
 ## 📥 Installation
 
 Install all dependencies:
+
 ```bash
 pnpm install
 ```
@@ -130,6 +132,7 @@ pnpm clean:cache
 ## ⚡ Turborepo
 
 This monorepo uses **Turborepo** for:
+
 - **Intelligent caching**: Builds are cached and automatically reused
 - **Parallel execution**: Tasks run in parallel when possible
 - **Managed dependencies**: Tasks are executed in the correct order based on dependencies
@@ -158,6 +161,7 @@ turbo run build --filter='[HEAD^1]'
 ### Cache Configuration
 
 The Turborepo cache is configured in `turbo.json`. The following outputs are cached:
+
 - `dist/**` (backend builds)
 - `.next/**` (Next.js builds, excluding `.next/cache/**`)
 - `build/**` (other builds)
@@ -187,6 +191,7 @@ pnpm add -r <package>
 ### Workspace Management
 
 Workspaces are configured in `pnpm-workspace.yaml` and include:
+
 - `apps/*` - Main applications
 - `packages/*` - Shared packages
 - `tools/*` - Tools and scripts
@@ -199,6 +204,7 @@ Workspaces are configured in `pnpm-workspace.yaml` and include:
 ### Recommended Structure for Extension
 
 You can add shared packages in `packages/`:
+
 ```
 packages/
 ├── shared-types/     # Shared TypeScript types
@@ -218,6 +224,7 @@ packages/
 ## 🔧 pnpm Configuration
 
 The pnpm configuration is in `.npmrc`:
+
 - `shamefully-hoist=true`: Hoist dependencies for compatibility
 - `node-linker=hoisted`: Hoisted node structure
 - `auto-install-peers=true`: Automatic installation of peer dependencies
@@ -239,6 +246,7 @@ pnpm build
 ### Environment Variables
 
 Environment variables can be defined in:
+
 - `.env` (root)
 - `.env.local` (local, not versioned)
 - `apps/backend/.env`
@@ -247,10 +255,12 @@ Environment variables can be defined in:
 ### Port Configuration
 
 Ports are configured as follows:
+
 - **Frontend**: Port `4570` (http://localhost:4570)
 - **Backend**: Port `4571` (http://localhost:4571)
 
 These ports are defined in:
+
 - `apps/frontend/package.json` - `dev` and `start` scripts
 - `apps/backend/src/main.ts` - default port
 - `apps/backend/package.json` - PORT environment variables in scripts
@@ -283,6 +293,7 @@ docker-compose build --no-cache
 ```
 
 Services will be available on:
+
 - Frontend: http://localhost:4570
 - Backend: http://localhost:4571
 

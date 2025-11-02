@@ -9,10 +9,12 @@ This directory contains GitHub Actions workflows for CI/CD, security scanning, a
 Main continuous integration workflow that runs on every push and pull request.
 
 **Triggers:**
+
 - Push to `main` or `develop` branches
 - Pull requests to `main` or `develop` branches
 
 **Jobs:**
+
 - **Lint**: Runs ESLint on all packages
 - **Type Check**: Validates TypeScript types across the monorepo
 - **Test**: Runs all test suites and uploads coverage reports
@@ -20,6 +22,7 @@ Main continuous integration workflow that runs on every push and pull request.
 - **Format Check**: Verifies code formatting with Prettier
 
 **Features:**
+
 - Automatic pnpm and Node.js setup
 - Dependency caching for faster builds
 - Turborepo cache support
@@ -27,6 +30,7 @@ Main continuous integration workflow that runs on every push and pull request.
 - Optional Codecov integration
 
 **Secrets Required (Optional):**
+
 - `CODECOV_TOKEN`: For uploading test coverage reports
 - `TURBO_TOKEN`: For Turborepo remote caching
 - `TURBO_TEAM`: Your Turborepo team name
@@ -36,18 +40,21 @@ Main continuous integration workflow that runs on every push and pull request.
 Builds and optionally pushes Docker images for backend and frontend.
 
 **Triggers:**
+
 - Push to `main` branch
 - Push of tags matching `v*`
 - Pull requests to `main` (build only, no push)
 - Manual workflow dispatch
 
 **Features:**
+
 - Multi-platform Docker builds
 - Image caching for faster builds
 - Automatic tagging based on branch, PR, or semver tags
 - Support for Docker Hub or other registries
 
 **Secrets Required:**
+
 - `DOCKER_USERNAME`: Docker registry username
 - `DOCKER_PASSWORD`: Docker registry password/token
 - `DOCKER_REGISTRY`: Docker registry URL (e.g., `docker.io`, `ghcr.io`, or your private registry)
@@ -57,11 +64,13 @@ Builds and optionally pushes Docker images for backend and frontend.
 Security scanning workflow using GitHub's CodeQL.
 
 **Triggers:**
+
 - Push to `main` or `develop` branches
 - Pull requests to `main` or `develop` branches
 - Weekly schedule (Mondays at 2 AM UTC)
 
 **Features:**
+
 - Automated security vulnerability scanning
 - Supports JavaScript and TypeScript
 - Results appear in GitHub Security tab
@@ -71,16 +80,19 @@ Security scanning workflow using GitHub's CodeQL.
 Creates GitHub releases with build artifacts.
 
 **Triggers:**
+
 - Push of tags matching `v*.*.*`
 - Push to `main` branch
 - Manual workflow dispatch
 
 **Features:**
+
 - Automatic release notes generation
 - Build artifact uploads
 - Supports semantic versioning
 
 **Permissions Required:**
+
 - `contents: write` (already configured in workflow)
 
 ### 5. Dependabot Auto-merge (`dependabot-auto-merge.yml`)
@@ -88,9 +100,11 @@ Creates GitHub releases with build artifacts.
 Automatically merges Dependabot PRs for minor and patch updates.
 
 **Triggers:**
+
 - Pull requests opened by Dependabot
 
 **Features:**
+
 - Auto-merges minor and patch updates
 - Helps keep dependencies up to date
 
@@ -128,11 +142,13 @@ Add these secrets in your GitHub repository settings (`Settings > Secrets and va
 ### Dependabot Configuration
 
 The `.github/dependabot.yml` file configures automatic dependency updates for:
+
 - npm/pnpm packages
 - GitHub Actions
 - Docker images
 
 Dependabot will:
+
 - Check weekly (Mondays at 2 AM UTC)
 - Open up to 10 PRs at a time
 - Ignore major version updates
@@ -156,6 +172,7 @@ Dependabot will:
 ### Downloading Artifacts
 
 Build artifacts are automatically uploaded and can be downloaded:
+
 1. Go to a completed workflow run
 2. Scroll to the "Artifacts" section
 3. Click to download build outputs
@@ -165,30 +182,33 @@ Build artifacts are automatically uploaded and can be downloaded:
 ### Adjusting Node.js Version
 
 Edit the `node-version` in workflow files:
+
 ```yaml
 - name: Setup Node.js
   uses: actions/setup-node@v4
   with:
-    node-version: '20'  # Change this
+    node-version: "20" # Change this
 ```
 
 ### Adjusting pnpm Version
 
 Edit the `version` in workflow files:
+
 ```yaml
 - name: Setup pnpm
   uses: pnpm/action-setup@v4
   with:
-    version: 8.15.0  # Change this
+    version: 8.15.0 # Change this
 ```
 
 ### Changing Trigger Branches
 
 Modify the `on.push.branches` and `on.pull_request.branches` sections:
+
 ```yaml
 on:
   push:
-    branches: [main, develop]  # Add/remove branches
+    branches: [main, develop] # Add/remove branches
 ```
 
 ## 🐛 Troubleshooting
@@ -223,4 +243,3 @@ on:
 - [Turborepo Documentation](https://turbo.build/repo/docs)
 - [pnpm Documentation](https://pnpm.io/)
 - [Docker Buildx Documentation](https://docs.docker.com/build/buildx/)
-
