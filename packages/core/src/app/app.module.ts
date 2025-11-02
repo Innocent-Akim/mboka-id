@@ -10,4 +10,3 @@ import { AppService } from './app.service';
   exports: [AppService],
 })
 export class AppModule {}
-

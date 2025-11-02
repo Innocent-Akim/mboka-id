@@ -19,4 +19,3 @@ import { appConfig, databaseConfig, serverConfig } from './config.factory';
   exports: [NestConfigModule],
 })
 export class ConfigModule {}
-

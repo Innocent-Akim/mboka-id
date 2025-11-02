@@ -22,4 +22,3 @@ export const appConfig = registerAs('app', () => ({
   version: process.env.APP_VERSION || '1.0.0',
   url: process.env.APP_URL || 'http://localhost:4571',
 }));
-

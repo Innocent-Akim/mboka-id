@@ -24,7 +24,7 @@ export interface IPaginationParams {
   page?: number;
   limit?: number;
   sortBy?: string;
-  sortOrder?: 'ASC' | 'DESC';
+  sortOrder?: "ASC" | "DESC";
 }
 
 export interface IPaginationResponse<T> {
@@ -34,4 +34,3 @@ export interface IPaginationResponse<T> {
   limit: number;
   totalPages: number;
 }
-
