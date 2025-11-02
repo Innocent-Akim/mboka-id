@@ -22,6 +22,9 @@ pnpm --filter @mboka-id/core add -D <package-name>
 - `src/config/` - Configuration NestJS avec validation Joi
 - `src/database/` - Module TypeORM pour la base de données
 - `src/bootstrap/` - Fonction de démarrage centralisée de l'application
+- `src/app/` - Modules NestJS de base (AppModule, AppController, AppService)
+
+> **Note**: Les contrats et interfaces sont maintenant dans le package séparé `@mboka-id/contracts`
 
 ## 📚 Dépendances incluses
 
@@ -87,6 +90,32 @@ import { ConfigService } from '@nestjs/config';
 constructor(private configService: ConfigService) {
   const port = this.configService.get<number>('server.port');
   const dbHost = this.configService.get<string>('database.host');
+}
+```
+
+### Contrats et Interfaces
+
+Les contrats sont maintenant dans le package dédié `@mboka-id/contracts` :
+
+```typescript
+import { 
+  IUser, 
+  ICreateUser, 
+  ILoginRequest, 
+  ILoginResponse,
+  IBaseResponse,
+  IPaginationParams 
+} from '@mboka-id/contracts';
+
+// Dans un service
+async createUser(data: ICreateUser): Promise<IBaseResponse<IUser>> {
+  // ...
+}
+
+// Dans un controller
+@Post('login')
+async login(@Body() loginDto: ILoginRequest): Promise<ILoginResponse> {
+  // ...
 }
 ```
 

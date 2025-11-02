@@ -27,6 +27,7 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@mboka-id/contracts": "workspace:^0.1.0",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.2",
     "@nestjs/jwt": "^11.0.1",

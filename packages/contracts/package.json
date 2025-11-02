@@ -1,0 +1,66 @@
+{
+  "name": "@mboka-id/contracts",
+  "version": "0.1.0",
+  "description": "Mboka ID Platform Contracts module",
+  "author": {
+    "name": "Mboka ID",
+    "email": "contact@mboka-id.com",
+    "url": "https://mboka-id.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mboka-id/mboka-id",
+    "directory": "packages/contracts"
+  },
+  "bugs": {
+    "url": "https://github.com/mboka-id/mboka-id/issues"
+  },
+  "homepage": "https://mboka-id.com",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:prod": "tsc",
+    "lib:build": "pnpm build",
+    "lib:build:prod": "pnpm build:prod",
+    "lib:watch": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "tslib": "^2.6.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.10.7",
+    "typescript": "^5.7.3"
+  },
+  "keywords": [
+    "nestjs",
+    "typescript",
+    "contracts",
+    "shared-module",
+    "common-module",
+    "mboka-id",
+    "platform",
+    "open-source",
+    "monorepo",
+    "interfaces",
+    "types"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "sideEffects": false
+}
+
