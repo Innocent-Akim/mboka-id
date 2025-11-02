@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM node:20-alpine AS builder
+FROM node:25-alpine AS builder
 
 # Install pnpm
 RUN corepack enable && corepack prepare pnpm@8.15.0 --activate
@@ -30,7 +30,7 @@ RUN pnpm --filter @mboka-id/core build
 RUN pnpm --filter @mboka-id/backend build
 
 # Stage 2: Production
-FROM node:20-alpine AS runner
+FROM node:25-alpine AS runner
 
 # Install pnpm
 RUN corepack enable && corepack prepare pnpm@8.15.0 --activate
