@@ -21,7 +21,7 @@ export interface DatabaseConnectionConfig {
 const parseDatabaseConfig = (prefix: string): DatabaseConnectionConfig => ({
   host: process.env[`${prefix}_HOST`] || process.env.DATABASE_HOST || 'localhost',
   port: parseInt(
-    process.env[`${prefix}_PORT`] || process.env.DATABASE_PORT || '5432',
+    process.env[`${prefix}_PORT`] || process.env.DATABASE_PORT || '5433',
     10,
   ),
   username:
@@ -31,7 +31,7 @@ const parseDatabaseConfig = (prefix: string): DatabaseConnectionConfig => ({
   password:
     process.env[`${prefix}_PASSWORD`] ||
     process.env.DATABASE_PASSWORD ||
-    'postgres',
+    'Akim12345',
   name:
     process.env[`${prefix}_NAME`] ||
     process.env.DATABASE_NAME ||
@@ -52,10 +52,25 @@ const parseDatabaseConfig = (prefix: string): DatabaseConnectionConfig => ({
 });
 
 export const databaseConfig = registerAs('database', () => {
-  // Configuration par défaut (connexion principale)
+  // Default configuration (main connection)
   const defaultConfig = parseDatabaseConfig('DATABASE');
+  
+  console.log('[Config Factory] Database config loaded:', {
+    host: defaultConfig.host,
+    port: defaultConfig.port,
+    username: defaultConfig.username,
+    database: defaultConfig.name,
+    passwordSet: !!defaultConfig.password,
+    fromEnv: {
+      DATABASE_HOST: process.env.DATABASE_HOST,
+      DATABASE_PORT: process.env.DATABASE_PORT,
+      DATABASE_USERNAME: process.env.DATABASE_USERNAME,
+      DATABASE_PASSWORD: process.env.DATABASE_PASSWORD ? '***' : 'not set',
+      DATABASE_NAME: process.env.DATABASE_NAME,
+    },
+  });
 
-  // Support pour plusieurs bases de données
+  // Multiple databases support
   // Format: DATABASES=db1,db2,db3
   const databasesList = process.env.DATABASES?.split(',').map((db) =>
     db.trim(),
@@ -65,7 +80,7 @@ export const databaseConfig = registerAs('database', () => {
     default: defaultConfig,
   };
 
-  // Parser les configurations additionnelles
+  // Parse additional configurations
   // Format: DATABASE_DB1_HOST, DATABASE_DB1_PORT, etc.
   databasesList.forEach((dbName) => {
     if (dbName !== 'default') {

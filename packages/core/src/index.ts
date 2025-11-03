@@ -16,3 +16,6 @@ export { bootstrapApplication, BootstrapOptions } from './bootstrap/bootstrap';
 export { AppModule } from './app/app.module';
 export { AppController } from './app/app.controller';
 export { AppService } from './app/app.service';
+export { BaseEntity } from './entity/base.entity';
+export { User } from './users/users.entity';
+export { UsersModule } from './users/users.module';

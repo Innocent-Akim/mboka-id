@@ -1,11 +1,12 @@
 import { Module, DynamicModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import {
   getTypeOrmConfig,
   getAllTypeOrmConfigs,
   getTypeOrmConfigByName,
+  ConfigModule,
 } from '@mboka-id/config';
+import { ConfigService } from '@nestjs/config';
 
 export interface DatabaseModuleOptions {
   /**
@@ -35,11 +36,11 @@ export class DatabaseModule {
         TypeOrmModule.forRootAsync({
           imports: [ConfigModule],
           name: name === 'default' ? undefined : name,
-          useFactory: (configService: ConfigService) => {
+          useFactory: async (configService: ConfigService) => {
             if (name === 'default') {
-              return getTypeOrmConfig(configService);
+              return await getTypeOrmConfig(configService);
             }
-            return getTypeOrmConfigByName(configService, name);
+            return await getTypeOrmConfigByName(configService, name);
           },
           inject: [ConfigService],
         }),
@@ -59,11 +60,11 @@ export class DatabaseModule {
         TypeOrmModule.forRootAsync({
           imports: [ConfigModule],
           name: connectionName === 'default' ? undefined : connectionName,
-          useFactory: (configService: ConfigService) => {
+          useFactory: async (configService: ConfigService) => {
             if (connectionName === 'default') {
-              return getTypeOrmConfig(configService);
+              return await getTypeOrmConfig(configService);
             }
-            return getTypeOrmConfigByName(configService, connectionName);
+            return await getTypeOrmConfigByName(configService, connectionName);
           },
           inject: [ConfigService],
         }),
@@ -76,17 +77,19 @@ export class DatabaseModule {
    * Initialise toutes les connexions configurées
    */
   static forRootAll(configService: ConfigService): DynamicModule {
-    const allConfigs = getAllTypeOrmConfigs(configService);
-    const connectionNames = Object.keys(allConfigs);
-
-    const imports = connectionNames.map((name) =>
+    const imports = [
       TypeOrmModule.forRootAsync({
         imports: [ConfigModule],
-        name: name === 'default' ? undefined : name,
-        useFactory: () => allConfigs[name],
-        inject: [],
+        useFactory: async () => {
+          const allConfigs = await getAllTypeOrmConfigs(configService);
+          const connectionNames = Object.keys(allConfigs);
+          
+          // Return the default connection config
+          return allConfigs['default'] || allConfigs[connectionNames[0]];
+        },
+        inject: [ConfigService],
       }),
-    );
+    ];
 
     return {
       module: DatabaseModule,

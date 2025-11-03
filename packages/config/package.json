@@ -1,7 +1,7 @@
 {
   "name": "@mboka-id/config",
   "version": "0.0.1",
-  "description": "Package de configuration centralisée pour les applications Mboka ID",
+  "description": "Centralized configuration package for Mboka ID applications",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -27,7 +27,8 @@
   "dependencies": {
     "@nestjs/config": "^4.0.2",
     "@nestjs/typeorm": "^11.0.0",
-    "joi": "^17.13.3"
+    "joi": "^17.13.3",
+    "pg": "^8.16.3"
   },
   "peerDependencies": {
     "@nestjs/common": "^11.0.1",
@@ -37,7 +38,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.7",
+    "@types/pg": "^8.11.10",
     "typescript": "^5.7.3"
   }
 }
-
