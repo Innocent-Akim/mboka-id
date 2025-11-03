@@ -1,6 +1,3 @@
-// Base contracts
-export * from "./base.contract";
-
 // User contracts
 export * from "./users.model";
 
@@ -21,4 +18,13 @@ export * from "./user-roles.model";
 export * from "./permissions.model";
 export * from "./users.model";
 
-export { ID } from "./base.entity";
+export {
+  ID,
+  IBaseEntity,
+  IBaseEntityDateModel,
+  IBaseEntityActionByUserModel,
+  IBaseModel,
+  IBaseSoftDeleteModel,
+  IBaseIntegrationModel,
+  EntityIntegrationTypes,
+} from "./base.entity";

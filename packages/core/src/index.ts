@@ -1,11 +1,21 @@
-export { ConfigModule } from './config/config.module';
 export {
+  ConfigModule,
   serverConfig,
   databaseConfig,
   appConfig,
-} from './config/config.factory';
-export { DatabaseModule } from './database/database.module';
+  getTypeOrmConfig,
+  getTypeOrmConfigByName,
+  getAllTypeOrmConfigs,
+  type DatabaseConnectionConfig,
+} from '@mboka-id/config';
+export {
+  DatabaseModule,
+  type DatabaseModuleOptions,
+} from './database/database.module';
 export { bootstrapApplication, BootstrapOptions } from './bootstrap/bootstrap';
 export { AppModule } from './app/app.module';
 export { AppController } from './app/app.controller';
 export { AppService } from './app/app.service';
+export { BaseEntity } from './entity/base.entity';
+export { User } from './users/users.entity';
+export { UsersModule } from './users/users.module';
